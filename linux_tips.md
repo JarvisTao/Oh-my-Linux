@@ -51,6 +51,7 @@ dpkg-reconfigure <package>
 ```
 
 ## The VIM using tips
+1. A perfect VIM [commands explanation](http://blog.csdn.net/g1036583997/article/details/50074553)
 ```vim
 :sh "暂时退出VIM，按<CTRL+d>回来
 ```
@@ -79,3 +80,47 @@ sudo apt-get install tmux -y
 mkdir -p ~/.tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
+
+## Configure the Git and send code to Github
+1. Install the git and new a repository on Github, and send my code to the remote repository.
+```
+# Some git basic commands, waitting for update
+git init
+git status
+git add <filename>
+git commit -m 'comment info'
+git branch <branch name>
+git checkout <branch name>
+git checkout -b <branch name>
+git merge <branch name>
+git branch -d <branch name>
+git branch -D <branch name>
+git tag <v1.0 or v2.0>
+```
+2. Send code to remote repository
+```
+# use rsa algorithm to create ssh key, path: `~/.ssh/id_rsa.pub`
+# then add it on the Github remote repository setting
+ssh-keygen -t rsa
+# check the SSH key
+ssh -T git@github.com
+git clone git@github.com:JarvisTao/test.git
+# build a remote repository, and find an error, so first pull it 
+# into local repository, then it will combine with the local 
+# repository. Then push, it will work
+git remote add origin git@github.com:JarvisTao/test.git
+git remote rm origin
+git pull origin master
+git push origin master
+git remote -v
+```
+3. configure the git use command like `git config --global ***` 
+```
+git config --global user.name "JarvisTao"
+git config --global user.email "jarvistao@qq.com"
+git config --global core.editor "vim"
+git config --global color.ui true
+git config --global core.quotepath false
+git config -l
+```
+
