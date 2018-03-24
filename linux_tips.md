@@ -57,10 +57,10 @@ dpkg-reconfigure <package>
 ```
 
 ## Configure The powerful VIM editor
- 1. Install the K-VIM from the [github](https://github.com/wklken/k-vim), and the Chinese Configure steps from [explanation](https://github.com/wklken/k-vim)
- 2. The colorscheme is `solarized dark`
- 3. Autoinstall the plugins e.g. `YouCompleteMe`,etc
- 
+    1. Install the K-VIM from the [github](https://github.com/wklken/k-vim), and the Chinese Configure steps from [explanation](https://github.com/wklken/k-vim)
+    2. The colorscheme is `solarized dark`
+    3. Autoinstall the plugins e.g. `YouCompleteMe`,etc
+
 ## Configure the Terminal
 1. change the default shell from `bash` to `zsh`,and install the `oh-my-zsh`, and custom the **plugins** and **themes** in the the `~/.zshrc` file
 ```bash
@@ -83,7 +83,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ## Configure the Git and send code to Github
 1. Install the git and new a repository on Github, and send my code to the remote repository.
-```
+```bash
 # Some git basic commands, waitting for update
 git init
 git status
@@ -98,7 +98,7 @@ git branch -D <branch name>
 git tag <v1.0 or v2.0>
 ```
 2. Send code to remote repository
-```
+```bash
 # use rsa algorithm to create ssh key, path: `~/.ssh/id_rsa.pub`
 # then add it on the Github remote repository setting
 ssh-keygen -t rsa
@@ -115,7 +115,7 @@ git push origin master
 git remote -v
 ```
 3. configure the git use command like `git config --global ***` 
-```
+```bash
 git config --global user.name "JarvisTao"
 git config --global user.email "jarvistao@qq.com"
 git config --global core.editor "vim"
@@ -124,3 +124,23 @@ git config --global core.quotepath false
 git config -l
 ```
 
+4. My git configuration.`~/.gitconfig`
+
+```bash
+[user]
+name = JarvisTao
+email = jarvistao@qq.com
+[core]
+editor = vim
+quotepath = false
+[color]
+ui = true
+[alias]
+st = status
+co = checkout
+ci = commit
+br = branch
+lg = log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+psm = push origin master
+plm = pull origin masher
+```
