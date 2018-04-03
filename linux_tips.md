@@ -144,3 +144,20 @@ lg = log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %s %Cgreen(
 psm = push origin master
 plm = pull origin masher
 ```
+5. Connecting ***Logitech K480 Keyboard*** to Deepin OS
+
+```bash
+# Turn on the bluetooth
+sudo service bluetooth start
+# Get in the bluetoothctl
+bluetoothctl
+# Then pair the MAC direction
+power on 
+agent on 
+default-agent
+scan on
+pair #your Device MAC
+# input the pair password, then pair successfully!!
+```
+
+   ​
