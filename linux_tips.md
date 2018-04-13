@@ -160,4 +160,4 @@ pair #your Device MAC
 # input the pair password, then pair successfully!!
 ```
 
-   ​
+   
