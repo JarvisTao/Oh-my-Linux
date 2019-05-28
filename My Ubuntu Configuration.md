@@ -222,12 +222,51 @@
 
     1. Refer to the [<https://www.jianshu.com/p/b8a4fef0ff58>](https://www.jianshu.com/p/b8a4fef0ff58) and [<https://my.oschina.net/tcstory/blog/466240>](https://my.oschina.net/tcstory/blog/466240)
 
-13.  
+13. **Repair** the **read-only** permission of your U flash disk
 
-14.  
+    ```bash
+    df -h # find the disk location that your U flash disk mount
+    #eg: /dev/sdc1
+    # then, umount the flash disk driver
+    sudo umount /media/user_name/disk_name
+    # finally, repair the filesystem
+    sudo dosfsck -v -a /dev/sdc1
+    # echo log
+    fsck.fat 3.0.28 (2015-05-16)
+    Checking we can access the last sector of the filesystem
+    There are differences between boot sector and its backup.
+    This is mostly harmless. Differences: (offset:original/backup)
+      52:da/00, 53:25/00, 54:18/00, 55:c1/00, 67:1e/47, 68:23/aa, 69:cd/fb
+      , 70:a6/2f, 480:00/65, 481:00/73, 482:00/74, 483:00/61, 484:00/72, 485:00/74
+      , 486:00/0d, 487:00/0a, 494:04/00
+      Not automatically fixing this.
+    Boot sector contents:
+    System ID "MSDOS5.0"
+    Media byte 0xf8 (hard disk)
+           512 bytes per logical sector
+          8192 bytes per cluster
+            38 reserved sectors
+    First FAT starts at byte 19456 (sector 38)
+             2 FATs, 32 bit entries
+       7795200 bytes per FAT (= 15225 sectors)
+    Root directory start at cluster 2 (arbitrary size)
+    Data area starts at byte 15609856 (sector 30488)
+       1948675 data clusters (15963545600 bytes)
+    63 sectors/track, 255 heads
+          2232 hidden sectors
+      31209288 sectors total
+    Orphaned long file name part "monkaa_frames_cleanpass"
+      Auto-deleting.
+    Reclaiming unconnected clusters.
+    Checking free cluster summary.
+    Performing changes.
+    /dev/sdc1: 1038 files, 68875/1948675 clusters
+    ```
 
-15.  
+14. 
+
+15. 
 
 16. 
 
-1. 
+17. 
