@@ -263,10 +263,77 @@
     /dev/sdc1: 1038 files, 68875/1948675 clusters
     ```
 
-14. 
 
-15. 
 
-16. 
 
-17. 
+# My Ubuntu 18.04 Configuration on X299
+
+1. Change the **User Name** of  System
+
+   Refer to [https://blog.csdn.net/sailor201211/article/details/52305591](https://blog.csdn.net/sailor201211/article/details/52305591)
+
+   (1) set your ***root*** passward 
+
+   ```bash
+   sudo passwd
+   ```
+
+   (2) log out your old user, then ***CTRL + ALT + F1***  open the terminal and login with **root** 
+
+   (3) 2 command to finish changing your user name
+
+   ```bash
+   usermod -l New_Login_Name -md Home_Directory Old_Login_Name
+   groupmod -n NewName OldName
+   ```
+
+2.  Fix the problem: `sudo vim: command not found`
+
+   Refer to [https://blog.csdn.net/duguduchong/article/details/8804117](https://blog.csdn.net/duguduchong/article/details/8804117)
+
+   Reason: 
+
+   > 不知道有多少人遇到这种 加上 sudo 找不命令的情况，怎么办呢，谢天谢天我们有google，百度不知道的google一定知道。
+   >
+   > 很多人就可以病急乱投医了，一会在 /etc/profile修改修改，一会在/etc/environment修改，~/.bashrc 修改了好多地方还是不行。网上也有些人是瞎指挥，帮倒忙。出现这种情况就是因为对linux了解不深的原因。不过网上总是有热心的高人的。
+   >
+   > 其实出现这种情况的原因，主要是因为当 sudo以管理权限执行命令的时候，linux将PATH环境变量进行了重置，当然这主要是因为系统安全的考虑，以防用户执行可引起灾难性的程序。
+   >
+   > 这个配置信息存储在了/etc/sudoers这个文件是，当指行sudo命令的时候系统寻找的是 secure_path下的目录，所有在 /etc/profile ~/.bashrc下对PATH做的配置都会被忽略。所以就出现加上 sudo xxx 找不到命令的情况，解决办法用很多种了，可以将要执行sudo的命令软链接到 secure_path的目录下，或者修改 secure_path变量。
+   >
+   > 解决办法:关掉执行 sudo 时,执行管理员权限时, linux的重置操作,
+   >
+   > 1. 编辑/etc/sudoers文件，把Defaults env_reset改成Defaults ! env_reset
+   >
+   > 2. 编辑.bashrc,最后添加alias sudo='sudo env PATH=$PATH'
+   >
+   > 3. 还可以在/etc/sudoers文件里, 将 secure_path 中加上/usr/local/vim
+
+3. Add **Pycharm** to Ubuntu docker
+
+   Refer to [https://blog.csdn.net/yfy1127yfy/article/details/88431477](https://blog.csdn.net/yfy1127yfy/article/details/88431477)
+
+   Add a *.desktop file to:
+
+   > /usr/share/applications
+   >
+   > or
+   >
+   > ~/.local/share/applications
+
+   The **pycharm.desktop** file:
+
+   > [Desktop Entry]
+   > Encoding=UTF-8
+   > Version=1.0
+   > Type=Application
+   > Name=Welcome to PyCharm
+   > Icon=/home/jarvis/download/pycharm-2019.1/bin/pycharm.png
+   > Path=/home/jarvis/download/pycharm-2019.1/bin
+   > Exec=/home/jarvis/download/pycharm-2019.1/jre64/bin/java -classpath /home/jarvis/download/pycharm-2019.1/lib/bootstrap.jar:/home/jarvis/download/pycharm-2019.1/lib/extensions.jar:/home/jarvis/download/pycharm-2019.1/lib/util.jar:/home/jarvis/download/pycharm-2019.1/lib/jdom.jar:/home/jarvis/download/pycharm-2019.1/lib/log4j.jar:/home/jarvis/download/pycharm-2019.1/lib/trove4j.jar:/home/jarvis/download/pycharm-2019.1/lib/jna.jar -Xms128m -Xmx750m -XX:ReservedCodeCacheSize=240m -XX:+UseConcMarkSweepGC -XX:SoftRefLRUPolicyMSPerMB=50 -ea -Dsun.io.useCanonCaches=false -Djava.net.preferIPv4Stack=true -Djdk.http.auth.tunneling.disabledSchemes="" -XX:+HeapDumpOnOutOfMemoryError -XX:-OmitStackTraceInFastThrow -Dawt.useSystemAAFontSettings=lcd -Dsun.java2d.renderer=sun.java2d.marlin.MarlinRenderingEngine -XX:ErrorFile=/home/jarvis2019/java_error_in_PYCHARM_%p.log -XX:HeapDumpPath=/home/jarvis2019/java_error_in_PYCHARM.hprof -Didea.paths.selector=PyCharm2019.1 -Djb.vmOptionsFile=/home/jarvis/download/pycharm-2019.1/bin/pycharm64.vmoptions -Didea.platform.prefix=Python com.intellij.idea.Main
+   > StartupNotify=false
+   > StartupWMClass=jetbrains-pycharm
+   > OnlyShowIn=Unity;
+   > X-UnityGenerated=true
+
+4. 
