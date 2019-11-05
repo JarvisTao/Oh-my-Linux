@@ -287,7 +287,28 @@
    groupmod -n NewName OldName
    ```
 
-2.  Fix the problem: `sudo vim: command not found`
+2.  make the speed of `git clone` more faster
+
+   Error: RPC failed; curl 18 transfer closed with outstanding read data remaining
+
+   (1) modify the ***/etc/hosts***
+
+   > 151.101.72.249 **github**.[http://global.ssl.fastly.net](https://link.zhihu.com/?target=http%3A//global.ssl.fastly.net)
+   > 192.30.253.112 **github**.com
+
+   (2) use the ***git:*** instead of ***https:***
+
+   (3) make the buffer larger
+
+   > git config --global http.postBuffer 524288000
+   > git config --global http.lowSpeedLimit 0
+   > git config --global http.lowSpeedTime 999999
+
+   (4) Only fetch the latest version of code(repository)
+
+   > git clone --depth 1 $clone_url
+
+3. Fix the problem: `sudo vim: command not found`
 
    Refer to [https://blog.csdn.net/duguduchong/article/details/8804117](https://blog.csdn.net/duguduchong/article/details/8804117)
 
@@ -309,7 +330,7 @@
    >
    > 3. 还可以在/etc/sudoers文件里, 将 secure_path 中加上/usr/local/vim
 
-3. Add **Pycharm** to Ubuntu docker
+4. Add **Pycharm** to Ubuntu docker
 
    Refer to [https://blog.csdn.net/yfy1127yfy/article/details/88431477](https://blog.csdn.net/yfy1127yfy/article/details/88431477)
 
@@ -336,4 +357,4 @@
    > OnlyShowIn=Unity;
    > X-UnityGenerated=true
 
-4. 
+5. 
