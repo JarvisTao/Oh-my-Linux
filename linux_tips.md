@@ -89,6 +89,7 @@ dpkg-reconfigure <package>
 	```
 
 ## Configure the Git and send code to Github
+
 1. Install the git and new a repository on Github, and send my code to the remote repository.
 
 	```bash
@@ -173,4 +174,49 @@ dpkg-reconfigure <package>
 	# input the pair password, then pair successfully!!
 	```
 
- 
+## Some commands studying on Ubuntu18.04
+
+1. **2>&1** : redirection command  and  **tee**  
+
+   Refer to: 
+
+   ​	[http://linux.tedu.cn/workplace/351526.html](http://linux.tedu.cn/workplace/351526.html)
+
+   ​	[https://www.cnblogs.com/sos-blue/p/6798810.html](https://www.cnblogs.com/sos-blue/p/6798810.html) 
+
+   ​	[https://blog.csdn.net/yufenghyc/article/details/45671373](https://blog.csdn.net/yufenghyc/article/details/45671373)
+
+   In bash or zsh, 
+
+   > 0: STDIN_FILENO(default: keyboard),
+   >
+   > 1: STDOUT_FILENO(default: terminal)
+   >
+   > 2: STDERR_FILENO(default: error info output)
+   >
+   > command > file : redirection the std output info from terminal into file, and left the error info 
+   >
+   > command > file 2>&1: redirection the std output and std error output info into file
+   >
+   > command 2>&1 | tee file : redirection all the info into file and left all info too
+
+   we use `test.sh` to test the process:
+
+   ```bash
+   # test.sh
+   date #打印当前时间
+   while true #死循环
+   do #每隔2秒打印一次 
+       sleep 2 
+       whatthis #不存在的命令 
+       echo -e "std output"
+   done
+   ```
+
+   when type:  `sh test.sh > test.txt`, there only left the error info on the terminal, and std output info are in `test.txt`
+
+   when type: `sh test.sh > test.txt 2>&1`, there left nothing, and all info are in `test.txt`
+
+   when type: `sh test.sh 2>&1 | tee test.txt`, there left all info and redirection them to `test.txt`
+
+   
