@@ -357,4 +357,84 @@
    > OnlyShowIn=Unity;
    > X-UnityGenerated=true
 
-5. 
+5. Install `opencv-3.4.2 and opencv_contrib` on Ubuntu 18.04
+
+   Refer to: 
+
+   [https://www.learnopencv.com/install-opencv-3-4-4-on-ubuntu-18-04/](https://www.learnopencv.com/install-opencv-3-4-4-on-ubuntu-18-04/) , [https://www.learnopencv.com/install-opencv-3-4-4-on-ubuntu-16-04/](https://www.learnopencv.com/install-opencv-3-4-4-on-ubuntu-16-04/)[https://www.learnopencv.com/install-opencv3-on-ubuntu/](https://www.learnopencv.com/install-opencv3-on-ubuntu/) 
+
+   The compile and install code is as following:
+
+   (1) Install OS Libraries
+
+   ```bash
+   sudo apt -y update
+   sudo apt -y upgrade
+   
+   sudo apt -y remove x264 libx264-dev
+    
+   ## Install dependencies
+   sudo apt -y install build-essential checkinstall cmake pkg-config yasm
+   sudo apt -y install git gfortran
+   sudo apt -y install libjpeg8-dev libpng-dev
+    
+   sudo apt -y install software-properties-common
+   sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
+   sudo apt -y update
+    
+   sudo apt -y install libjasper1
+   sudo apt -y install libtiff-dev
+   sudo apt -y install libtiff5-dev
+    
+   sudo apt -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev
+   sudo apt -y install libxine2-dev libv4l-dev
+   cd /usr/include/linux
+   sudo ln -s -f ../libv4l1-videodev.h videodev.h
+   cd -
+    
+   sudo apt -y install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+   sudo apt -y install libgtk2.0-dev libtbb-dev qt5-default
+   sudo apt -y install libatlas-base-dev
+   sudo apt -y install libfaac-dev libmp3lame-dev libtheora-dev
+   sudo apt -y install libvorbis-dev libxvidcore-dev
+   sudo apt -y install libopencore-amrnb-dev libopencore-amrwb-dev
+   sudo apt -y install libavresample-dev
+   sudo apt -y install x264 v4l-utils
+    
+   # Optional dependencies
+   sudo apt -y install libprotobuf-dev protobuf-compiler
+   sudo apt -y install libgoogle-glog-dev libgflags-dev
+   sudo apt -y install libgphoto2-dev libeigen3-dev libhdf5-dev doxygen
+   ```
+
+   (2) Compile and Install OpenCV with contrib modules
+
+   Error: 
+
+   > `makefile:162: recipe for target 'all' failed opencv`
+   >
+   >   `//usr/lib/libvtkIO.so.5.10：对‘TIFFNumberOfTiles@LIBTIFF_4.0’未定义的引用` 
+
+   Resolution: add cmake configuration `-D BUILD_TIFF=ON`
+
+   ```bash
+   cmake -D CMAKE_BUILD_TYPE=RELEASE \
+               -D CMAKE_INSTALL_PREFIX=/usr/local \
+               -D INSTALL_C_EXAMPLES=ON \
+               -D INSTALL_PYTHON_EXAMPLES=ON \
+               -D WITH_TBB=ON \
+               -D WITH_V4L=ON \
+           -D WITH_QT=ON \
+           -D WITH_OPENGL=ON \
+           -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+           -D BUILD_EXAMPLES=ON -D BUILD_TIFF=ON..
+   ```
+
+   ```bash
+   make -j10
+   sudo make install
+   ```
+
+   
+
+6. 
