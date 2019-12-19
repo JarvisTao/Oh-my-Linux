@@ -287,11 +287,21 @@
    groupmod -n NewName OldName
    ```
 
-2.  make the speed of `git clone` more faster
+2. make the speed of `git clone` more faster
 
-   Error: RPC failed; curl 18 transfer closed with outstanding read data remaining
+   (0) Refer to [小技巧-如何加快github下载代码的速度](https://blog.csdn.net/mist99/article/details/80602090) 
+
+   get the ip address of global.ssl.fastly from [http://github.global.ssl.fastly.net.ipaddress.com/#ipinfo](http://github.global.ssl.fastly.net.ipaddress.com/#ipinfo) 
+
+   get the ip address of github.com from [http://github.com.ipaddress.com/#ipinfo](http://github.com.ipaddress.com/#ipinfo)
+
+   add them to `/etc/hosts` and restart the network  `/etc/init.d/networking restart`
+
+   
 
    (1) modify the ***/etc/hosts***
+
+   Error: RPC failed; curl 18 transfer closed with outstanding read data remaining
 
    > 151.101.72.249 **github**.[http://global.ssl.fastly.net](https://link.zhihu.com/?target=http%3A//global.ssl.fastly.net)
    > 192.30.253.112 **github**.com
